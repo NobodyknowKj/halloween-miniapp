@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>ساختمان شماره ۱۴ — بازی داستانی هالووین</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- صداها -->
+<audio id="audio-ambient" src="assets/audio/ambient.ogg" loop preload="none"></audio>
+<audio id="audio-knock" src="assets/audio/knock.ogg" preload="auto"></audio>
+<audio id="audio-bell" src="assets/audio/bell.ogg" preload="auto"></audio>
+<audio id="audio-click" src="assets/audio/click.ogg" preload="auto"></audio>
+
+<!-- نوار بالا -->
+<header id="topbar">
+  <button id="btn-home" class="icon-btn" title="صفحه اصلی">🏠</button>
+  <div id="stats-bar" class="hidden">
+    <span class="stat" id="stat-courage">🦁 ۰</span>
+    <span class="stat" id="stat-empathy">❤️ ۰</span>
+    <span class="stat" id="stat-sanity">🧠 ۲</span>
+    <span class="stat hidden" id="stat-item">🎒 📓</span>
+  </div>
+  <button id="btn-sound" class="icon-btn" title="صدا">🔇</button>
+</header>
+
+<!-- صفحه شروع -->
+<main id="screen-intro" class="screen">
+  <div class="hero">
+    <img src="assets/img/building.jpg" alt="ساختمان شماره ۱۴ در شب هالووین">
+    <div class="hero-shade"></div>
+    <div class="hero-title">
+      <div class="pumpkin">🎃</div>
+      <h1>ساختمان شماره ۱۴</h1>
+      <p class="subtitle">یک بازی داستانی ترسناک برای هالووین</p>
+    </div>
+  </div>
+  <div class="sheet">
+    <p class="intro-text">
+      تو تازه به آپارتمان ۱۴ در ساختمانی قدیمی در یوسف‌آباد اسباب‌کشی کرده‌ای.
+      مستأجر قبلی، سارا، پارسال همین شب گم شد. سرایدار سه قانون دارد، خانم شریفی
+      هر شب برای پسرش شام می‌پزد، و لیلای هشت‌ساله با کسی حرف می‌زند که بقیه نمی‌بینندش…
+    </p>
+    <ul class="howto">
+      <li>📖 داستان را می‌خوانی و از بین گزینه‌ها انتخاب می‌کنی.</li>
+      <li>🦁❤️🧠 هر انتخاب روی شجاعت، همدلی و آرامشت اثر می‌گذارد و پایان را می‌سازد.</li>
+      <li>🏆 بازی ۶ پایان اصلی و ۲ پایان فرعی دارد — هر بار می‌توانی آدم دیگری باشی.</li>
+      <li>🎧 برای حس کامل، صدا را روشن کن.</li>
+    </ul>
+    <button id="btn-start" class="primary-btn">🔑 کلید را بچرخان و شروع کن</button>
+    <button id="btn-continue" class="ghost-btn hidden">▶️ ادامه‌ی بازی قبلی</button>
+    <button id="btn-endings" class="ghost-btn">🏆 پایان‌هایی که پیدا کردم (<span id="intro-endings-count">۰/۸</span>)</button>
+    <p class="footnote">پیشرفتت روی همین گوشی ذخیره می‌شود.</p>
+  </div>
+</main>
+
+<!-- صفحه بازی -->
+<main id="screen-game" class="screen hidden">
+  <div class="scene-img-wrap">
+    <img id="scene-img-a" class="scene-img" src="assets/img/building.jpg" alt="">
+    <img id="scene-img-b" class="scene-img faded" src="assets/img/building.jpg" alt="">
+    <div class="scene-shade"></div>
+    <div id="scene-step" class="scene-step"></div>
+  </div>
+  <div class="sheet game-sheet">
+    <div id="scene-text" class="scene-text"></div>
+    <div id="ending-banner" class="ending-banner hidden"></div>
+    <div id="choices" class="choices"></div>
+    <div id="ending-actions" class="ending-actions hidden">
+      <button id="btn-again" class="primary-btn">🔄 دوباره بازی کن</button>
+      <button id="btn-send-result" class="ghost-btn hidden">📩 ثبت این پایان در چت بات</button>
+      <button id="btn-endings2" class="ghost-btn">🏆 پایان‌های من</button>
+    </div>
+  </div>
+</main>
+
+<!-- صفحه پایان‌ها -->
+<main id="screen-endings" class="screen hidden">
+  <div class="sheet">
+    <h2 class="endings-title">🏆 پایان‌های ساختمان</h2>
+    <p class="endings-sub" id="endings-summary"></p>
+    <div id="endings-grid" class="endings-grid"></div>
+    <button id="btn-back" class="primary-btn">بازگشت</button>
+  </div>
+</main>
+
+<script src="story_data.js"></script>
+<script src="engine.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

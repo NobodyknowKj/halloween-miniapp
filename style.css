@@ -1,0 +1,151 @@
+/* ساختمان شماره ۱۴ — مینی‌اپ تلگرام
+   تم: شب گرم و تاریک؛ نور فانوس روی آجر قدیمی. RTL و موبایل‌اول. */
+:root {
+  --bg: var(--tg-theme-bg-color, #14100d);
+  --sheet: var(--tg-theme-secondary-bg-color, #1e1813);
+  --text: var(--tg-theme-text-color, #f3e9dc);
+  --hint: var(--tg-theme-hint-color, #a89880);
+  --accent: #e8873a;
+  --accent-soft: #ffb066;
+  --danger: #c8452c;
+  --card: rgba(255, 255, 255, 0.055);
+  --card-border: rgba(255, 176, 102, 0.16);
+  --shadow: 0 12px 34px rgba(0, 0, 0, 0.5);
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Vazirmatn", Tahoma, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+.hidden { display: none !important; }
+
+/* ── نوار بالا ── */
+#topbar {
+  position: sticky; top: 0; z-index: 30;
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  padding: calc(8px + env(safe-area-inset-top)) 12px 8px;
+  background: linear-gradient(180deg, rgba(10, 7, 5, 0.92), rgba(10, 7, 5, 0.75));
+  backdrop-filter: blur(10px);
+}
+.icon-btn {
+  width: 40px; height: 40px; border-radius: 12px; border: 1px solid var(--card-border);
+  background: var(--card); color: var(--text); font-size: 18px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; flex: 0 0 auto;
+}
+.icon-btn:active { transform: scale(0.94); }
+#stats-bar { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+.stat {
+  font-size: 13px; padding: 6px 9px; border-radius: 999px;
+  background: var(--card); border: 1px solid var(--card-border); white-space: nowrap;
+}
+.stat.bump { animation: bump 0.45s ease; }
+@keyframes bump { 30% { transform: scale(1.22); border-color: var(--accent); } }
+
+/* ── صفحه‌ها ── */
+.screen { animation: screen-in 0.35s ease; padding-bottom: calc(20px + env(safe-area-inset-bottom)); }
+@keyframes screen-in { from { opacity: 0; transform: translateY(8px); } }
+
+/* ── قهرمان (شروع) و تصویر صحنه ── */
+.hero, .scene-img-wrap { position: relative; overflow: hidden; }
+.hero { height: 52vh; min-height: 320px; }
+.scene-img-wrap { height: 38vh; min-height: 230px; }
+.hero img, .scene-img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+}
+.scene-img { transition: opacity 0.7s ease, transform 8s ease; transform: scale(1.06); }
+.scene-img.faded { opacity: 0; }
+.hero-shade, .scene-shade {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(10,7,5,0.12) 40%, var(--bg) 98%);
+}
+.hero-title {
+  position: absolute; inset-inline: 0; bottom: 10px; text-align: center; padding: 0 18px;
+}
+.hero-title .pumpkin { font-size: 40px; animation: float 3.2s ease-in-out infinite; }
+@keyframes float { 50% { transform: translateY(-7px) rotate(-4deg); } }
+.hero-title h1 {
+  margin: 4px 0 2px; font-size: 32px; font-weight: 900;
+  text-shadow: 0 4px 22px rgba(0,0,0,0.8);
+}
+.hero-title .subtitle { margin: 0; color: var(--accent-soft); font-size: 15px; }
+.scene-step {
+  position: absolute; bottom: 8px; inset-inline-start: 14px; z-index: 2;
+  font-size: 12px; color: #ffd9ae; background: rgba(10,7,5,0.55);
+  padding: 4px 10px; border-radius: 999px; backdrop-filter: blur(4px);
+}
+
+/* ── بدنه ── */
+.sheet {
+  margin: -6px 12px 0; position: relative; z-index: 3;
+  background: var(--sheet); border: 1px solid var(--card-border);
+  border-radius: 22px; padding: 20px 18px 22px; box-shadow: var(--shadow);
+}
+.intro-text { line-height: 2; font-size: 15px; margin: 0 0 10px; }
+.howto { list-style: none; margin: 0 0 18px; padding: 0; }
+.howto li { line-height: 2; font-size: 14px; color: var(--hint); }
+.footnote { text-align: center; color: var(--hint); font-size: 12px; margin: 12px 0 0; }
+
+.primary-btn, .ghost-btn {
+  display: block; width: 100%; border-radius: 16px; cursor: pointer;
+  font-family: inherit; font-size: 16px; padding: 14px 16px; margin-top: 10px;
+  transition: transform 0.12s ease, filter 0.15s ease;
+}
+.primary-btn {
+  border: none; color: #fff7ec; font-weight: 800;
+  background: linear-gradient(135deg, #d96c26, #b3451f);
+  box-shadow: 0 8px 22px rgba(217, 108, 38, 0.35);
+}
+.primary-btn:active { transform: scale(0.98); }
+.ghost-btn {
+  background: var(--card); color: var(--text); border: 1px solid var(--card-border);
+}
+.ghost-btn:active { transform: scale(0.98); }
+
+/* ── متن و انتخاب‌های بازی ── */
+.scene-text { font-size: 15.5px; line-height: 2.05; animation: text-in 0.5s ease; }
+.scene-text p { margin: 0 0 12px; }
+.scene-text strong { color: var(--accent-soft); }
+@keyframes text-in { from { opacity: 0; transform: translateY(6px); } }
+.choices { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+.choice-btn {
+  width: 100%; text-align: start; font-family: inherit; font-size: 15px; line-height: 1.8;
+  color: var(--text); background: var(--card); border: 1px solid var(--card-border);
+  border-radius: 16px; padding: 13px 15px; cursor: pointer;
+  animation: choice-in 0.4s ease both; transition: transform 0.12s ease, border-color 0.15s, background 0.15s;
+}
+.choice-btn:nth-child(2) { animation-delay: 0.06s; }
+.choice-btn:nth-child(3) { animation-delay: 0.12s; }
+.choice-btn:nth-child(4) { animation-delay: 0.18s; }
+.choice-btn:nth-child(5) { animation-delay: 0.24s; }
+.choice-btn:nth-child(6) { animation-delay: 0.30s; }
+@keyframes choice-in { from { opacity: 0; transform: translateY(10px); } }
+.choice-btn:active { transform: scale(0.985); border-color: var(--accent); background: rgba(232, 135, 58, 0.14); }
+.choice-btn:disabled { opacity: 0.55; }
+
+.ending-banner {
+  margin: 14px 0 4px; text-align: center; font-size: 19px; font-weight: 900;
+  color: var(--accent-soft); animation: text-in 0.6s ease;
+}
+.ending-actions { margin-top: 8px; }
+
+/* ── گالری پایان‌ها ── */
+.endings-title { margin: 2px 0 4px; font-size: 21px; }
+.endings-sub { color: var(--hint); margin: 0 0 14px; font-size: 13.5px; }
+.endings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+.ending-card {
+  border-radius: 16px; overflow: hidden; border: 1px solid var(--card-border);
+  background: var(--card); position: relative; min-height: 118px;
+  display: flex; flex-direction: column; justify-content: flex-end;
+}
+.ending-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.85; }
+.ending-card .cap {
+  position: relative; padding: 22px 10px 9px; font-size: 13px; line-height: 1.7;
+  background: linear-gradient(180deg, transparent, rgba(8,5,3,0.88) 55%);
+}
+.ending-card.locked img { filter: grayscale(1) brightness(0.5); }
+.ending-card.locked .cap { color: var(--hint); }
+.ending-card .mark { position: absolute; top: 7px; inset-inline-start: 9px; z-index: 2; font-size: 15px; }
